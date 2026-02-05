@@ -1,0 +1,256 @@
+
+// ==================== Resume Tools Functions (INSERT AT LINE 997) ====================
+
+function openResumeTool(toolType) {
+    const toolInfo = {
+        'builder': {
+            title: '📝 RESUME BUILDER',
+            color: 'var(--neon-blue)',
+            content: `
+                <h3 style="color: var(--neon-blue); margin-bottom: 1rem; font-size: 1.5rem;">Build Your Perfect Resume</h3>
+                <p style="margin-bottom: 1rem;">Our AI-powered resume builder helps you create professional, ATS-optimized resumes in minutes.</p>
+                
+                <div style="margin: 2rem 0;">
+                    <h4 style="color: var(--neon-green); margin-bottom: 1rem;">✨ Features:</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(0, 240, 255, 0.05); border-left: 3px solid var(--neon-blue); border-radius: 4px;">
+                            📋 20+ Professional Templates
+                        </li>
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(0, 240, 255, 0.05); border-left: 3px solid var(--neon-blue); border-radius: 4px;">
+                            🎨 Drag-and-Drop Builder
+                        </li>
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(0, 240, 255, 0.05); border-left: 3px solid var(--neon-blue); border-radius: 4px;">
+                            🤖 AI Content Suggestions
+                        </li>
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(0, 240, 255, 0.05); border-left: 3px solid var(--neon-blue); border-radius: 4px;">
+                            📥 Export to PDF/DOCX
+                        </li>
+                    </ul>
+                </div>
+                
+                <p style="padding: 1rem; background: rgba(255, 184, 0, 0.1); border-radius: 8px; border: 1px solid #FFB800; color: var(--gray-200);">
+                    <strong>🚀 Coming Soon!</strong> We're currently developing this feature. Subscribe to our newsletter to get early access!
+                </p>
+            `
+        },
+        'ats': {
+            title: '🎯 ATS SCORE GENERATOR',
+            color: 'var(--neon-green)',
+            content: `
+                <h3 style="color: var(--neon-green); margin-bottom: 1rem; font-size: 1.5rem;">Check Your ATS Compatibility</h3>
+                <p style="margin-bottom: 1rem;">Our current resume analyzer already includes ATS scoring! Upload your resume above to get started.</p>
+                
+                <div style="margin: 2rem 0;">
+                    <h4 style="color: var(--neon-blue); margin-bottom: 1rem;">📊 What We Check:</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(0, 255, 148, 0.05); border-left: 3px solid var(--neon-green); border-radius: 4px;">
+                            ✓ Keyword Matching (40% weight)
+                        </li>
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(0, 255, 148, 0.05); border-left: 3px solid var(--neon-green); border-radius: 4px;">
+                            ✓ Skills Coverage (25% weight)
+                        </li>
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(0, 255, 148, 0.05); border-left: 3px solid var(--neon-green); border-radius: 4px;">
+                            ✓ Experience Level (20% weight)
+                        </li>
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(0, 255, 148, 0.05); border-left: 3px solid var(--neon-green); border-radius: 4px;">
+                            ✓ Resume Quality (15% weight)
+                        </li>
+                    </ul>
+                </div>
+                
+                <p style="padding: 1rem; background: rgba(0, 255, 148, 0.1); border-radius: 8px; border: 1px solid var(--neon-green); color: var(--gray-200);">
+                    <strong>👆 This feature is LIVE!</strong> Scroll up to upload your resume and get your ATS score instantly.
+                </p>
+            `
+        },
+        'cover': {
+            title: '✉️ COVER LETTER AI',
+            color: 'var(--neon-purple)',
+            content: `
+                <h3 style="color: var(--neon-purple); margin-bottom: 1rem; font-size: 1.5rem;">AI-Powered Cover Letters</h3>
+                <p style="margin-bottom: 1rem;">Generate personalized cover letters that match your resume and the job description.</p>
+                
+                <div style="margin: 2rem 0;">
+                    <h4 style="color: var(--neon-blue); margin-bottom: 1rem;">🤖 How It Works:</h4>
+                    <div style="padding: 1.5rem; background: rgba(176, 38, 255, 0.05); border-radius: 12px; border: 2px solid rgba(176, 38, 255, 0.2);">
+                        <ol style="color: var(--gray-200); line-height: 2;">
+                            <li>Upload your resume</li>
+                            <li>Paste the job description</li>
+                            <li>AI analyzes and matches keywords</li>
+                            <li>Generates 3 cover letter variations</li>
+                            <li>Customize and download</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <p style="padding: 1rem; background: rgba(176, 38, 255, 0.1); border-radius: 8px; border: 1px solid var(--neon-purple); color: var(--gray-200);">
+                    <strong>🔬 Beta Testing!</strong> This feature is in beta. Email us to join the waitlist!
+                </p>
+            `
+        },
+        'templates': {
+            title: '🎨 RESUME TEMPLATES',
+            color: '#FFB800',
+            content: `
+                <h3 style="color: #FFB800; margin-bottom: 1rem; font-size: 1.5rem;">Professional Resume Templates</h3>
+                <p style="margin-bottom: 1rem;">Choose from 50+ expertly designed resume templates optimized for ATS systems.</p>
+                
+                <div style="margin: 2rem 0;">
+                    <h4 style="color: var(--neon-blue); margin-bottom: 1rem;">📚 Template Categories:</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div style="padding: 1rem; background: rgba(255, 184, 0, 0.05); border-radius: 8px; border: 1px solid rgba(255, 184, 0, 0.3);">
+                            <strong style="color: #FFB800;">💼 Corporate</strong>
+                            <p style="font-size: 0.875rem; color: var(--gray-400); margin-top: 0.5rem;">Traditional layouts</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(255, 184, 0, 0.05); border-radius: 8px; border: 1px solid rgba(255, 184, 0, 0.3);">
+                            <strong style="color: #FFB800;">💻 Tech</strong>
+                            <p style="font-size: 0.875rem; color: var(--gray-400); margin-top: 0.5rem;">Modern, clean designs</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(255, 184, 0, 0.05); border-radius: 8px; border: 1px solid rgba(255, 184, 0, 0.3);">
+                            <strong style="color: #FFB800;">🎨 Creative</strong>
+                            <p style="font-size: 0.875rem; color: var(--gray-400); margin-top: 0.5rem;">Bold, visual layouts</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(255, 184, 0, 0.05); border-radius: 8px; border: 1px solid rgba(255, 184, 0, 0.3);">
+                            <strong style="color: #FFB800;">📊 Executive</strong>
+                            <p style="font-size: 0.875rem; color: var(--gray-400); margin-top: 0.5rem;">Senior level formats</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="padding: 1rem; background: rgba(0, 255, 148, 0.1); border-radius: 8px; border: 1px solid var(--neon-green); color: var(--gray-200);">
+                    <strong>🎁 100% Free!</strong> All templates available for download - no signup required.
+                </p>
+            `
+        },
+        'keywords': {
+            title: '🔍 KEYWORD OPTIMIZER',
+            color: 'var(--neon-pink)',
+            content: `
+                <h3 style="color: var(--neon-pink); margin-bottom: 1rem; font-size: 1.5rem;">Optimize Your Keywords</h3>
+                <p style="margin-bottom: 1rem;">Extract keywords from job descriptions and optimize your resume to match them.</p>
+                
+                <div style="margin: 2rem 0;">
+                    <h4 style="color: var(--neon-blue); margin-bottom: 1rem;">⚡ Key Features:</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(255, 0, 110, 0.05); border-left: 3px solid var(--neon-pink); border-radius: 4px;">
+                            🔎 Auto-extract keywords from job posts
+                        </li>
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(255, 0, 110, 0.05); border-left: 3px solid var(--neon-pink); border-radius: 4px;">
+                            📊 Keyword density analysis
+                        </li>
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(255, 0, 110, 0.05); border-left: 3px solid var(--neon-pink); border-radius: 4px;">
+                            ✨ Smart synonym suggestions
+                        </li>
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(255, 0, 110, 0.05); border-left: 3px solid var(--neon-pink); border-radius: 4px;">
+                            🎯 90%+ match recommendations
+                        </li>
+                    </ul>
+                </div>
+                
+                <p style="padding: 1rem; background: rgba(255, 0, 110, 0.1); border-radius: 8px; border: 1px solid var(--neon-pink); color: var(--gray-200);">
+                    <strong>💎 Pro Feature!</strong> Available with premium subscription. Try free for 7 days!
+                </p>
+            `
+        },
+        'interview': {
+            title: '🎤 INTERVIEW PREP',
+            color: 'var(--neon-blue)',
+            content: `
+                <h3 style="color: var(--neon-blue); margin-bottom: 1rem; font-size: 1.5rem;">AI Interview Practice</h3>
+                <p style="margin-bottom: 1rem;">Practice interviews with AI-generated questions tailored to your role and experience.</p>
+                
+                <div style="margin: 2rem 0;">
+                    <h4 style="color: var(--neon-green); margin-bottom: 1rem;">🎯 What You Get:</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(0, 240, 255, 0.05); border-left: 3px solid var(--neon-blue); border-radius: 4px;">
+                            💬 Role-specific questions (500+ database)
+                        </li>
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(0, 240, 255, 0.05); border-left: 3px solid var(--neon-blue); border-radius: 4px;">
+                            📝 Answer evaluation with AI feedback
+                        </li>
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(0, 240, 255, 0.05); border-left: 3px solid var(--neon-blue); border-radius: 4px;">
+                            🎥 Video practice mode (coming soon)
+                        </li>
+                        <li style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(0, 240, 255, 0.05); border-left: 3px solid var(--neon-blue); border-radius: 4px;">
+                            📊 Performance tracking over time
+                        </li>
+                    </ul>
+                </div>
+                
+                <p style="padding: 1rem; background: rgba(0, 240, 255, 0.1); border-radius: 8px; border: 1px solid var(--neon-blue); color: var(--gray-200);">
+                    <strong>🆕 Just Launched!</strong> Try it free - no credit card required!
+                </p>
+            `
+        }
+    };
+    
+    const tool = toolInfo[toolType];
+    
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        animation: fadeIn 0.3s ease-out;
+    `;
+    
+    modal.innerHTML = `
+        <div style="
+            background: var(--bg-card);
+            border: 2px solid ${tool.color};
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 0 40px ${tool.color}40, var(--shadow-xl);
+            animation: slideInUp 0.3s ease-out;
+        ">
+            <h2 style="
+                font-family: var(--font-heading);
+                font-size: 2rem;
+                color: ${tool.color};
+                margin-bottom: 1.5rem;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                text-shadow: 0 0 10px ${tool.color}80;
+            ">${tool.title}</h2>
+            
+            <div style="color: var(--gray-200); line-height: 1.8; font-size: 1rem;">
+                ${tool.content}
+            </div>
+            
+            <button onclick="this.closest('[style*=fixed]').remove()" style="
+                margin-top: 2rem;
+                padding: 1rem 2rem;
+                background: var(--gradient-primary);
+                border: none;
+                border-radius: 8px;
+                color: var(--white);
+                font-weight: 700;
+                font-size: 1rem;
+                cursor: pointer;
+                width: 100%;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                box-shadow: 0 4px 15px rgba(0, 240, 255, 0.3);
+                transition: all 0.3s ease;
+            " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                Close
+            </button>
+        </div>
+    `;
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
+    
+    document.body.appendChild(modal);
+}

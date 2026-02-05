@@ -1,0 +1,519 @@
+/* ==================== EXTREME CYBER DARK THEME - ADDITIONAL STYLES ==================== */
+
+/* Cyber Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Orbitron', 'Rajdhani', sans-serif !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.card-header h2 {
+    color: var(--neon-blue) !important;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    font-size: 1.75rem !important;
+}
+
+.logo-text h1 {
+    font-size: 2.5rem !important;
+    font-weight: 900 !important;
+    color: var(--white) !important;
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.6), 0 0 40px rgba(176, 38, 255, 0.4) !important;
+}
+
+.tagline {
+    color: var(--neon-green) !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Dark Theme for All Cards */
+.role-card {
+    background: var(--bg-card) !important;
+    border-color: rgba(0, 240, 255, 0.3) !important;
+}
+
+.role-card:hover {
+    border-color: var(--neon-blue) !important;
+    background: var(--bg-card-hover) !important;
+    box-shadow: var(--glow-blue) !important;
+}
+
+.role-card.selected {
+    border-color: var(--neon-purple) !important;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.15) 0%, rgba(176, 38, 255, 0.15) 100%) !important;
+    box-shadow: 0 0 0 4px rgba(176, 38, 255, 0.3), var(--glow-purple) !important;
+    transform: scale(1.05) !important;
+}
+
+.role-card h3 {
+    color: var(--white) !important;
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+}
+
+.role-card p {
+    color: var(--gray-400) !important;
+}
+
+/* Role Skills Popup */
+/* Role Skills Popup - FIXED STACKING */
+.role-card {
+    position: relative;
+    z-index: 1;
+    /* Default stacking order */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.role-card.active {
+    z-index: 999;
+    /* lift active card above all neighbors */
+    transform: scale(1.05);
+    /* Slight zoom for emphasis */
+}
+
+/* Ensure grid doesn't clip */
+.role-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem 1.5rem;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 250px;
+    /* Space for popups */
+}
+
+.role-skills-popup {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 1rem;
+    background: var(--bg-card);
+    border: 2px solid var(--neon-purple);
+    border-radius: 12px;
+    padding: 1.5rem;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), var(--glow-purple);
+    visibility: hidden;
+    /* prevents clicking when hidden */
+}
+
+.role-card.active .role-skills-popup {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.skills-popup-header {
+    font-size: 1rem;
+    color: var(--neon-purple);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-tag {
+    padding: 0.4rem 0.8rem;
+    background: rgba(176, 38, 255, 0.1);
+    border: 1px solid var(--neon-purple);
+    border-radius: 6px;
+    color: var(--neon-purple);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Dark Theme Inputs */
+#resumeInput {
+    background: var(--bg-darker) !important;
+    color: var(--gray-100) !important;
+    border-color: rgba(0, 240, 255, 0.3) !important;
+    min-height: 300px !important;
+}
+
+/* PDF Upload Section - BIGGER AND MORE PROMINENT */
+.upload-section {
+    margin-bottom: 2rem;
+}
+
+.upload-box {
+    display: block;
+    padding: 5rem 3rem !important;
+    background: var(--bg-card);
+    border: 3px dashed var(--neon-blue) !important;
+    border-radius: 24px !important;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-height: 280px;
+}
+
+.upload-box::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: var(--gradient-primary);
+    border-radius: 24px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s;
+}
+
+.upload-box:hover {
+    border-color: var(--neon-purple) !important;
+    background: var(--bg-card-hover);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--glow-blue), 0 20px 60px rgba(0, 240, 255, 0.3) !important;
+}
+
+.upload-box:hover::before {
+    opacity: 0.15;
+}
+
+.upload-icon {
+    font-size: 5rem !important;
+    margin-bottom: 2rem !important;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.5));
+}
+
+.upload-box h3 {
+    font-size: 2rem !important;
+    color: var(--neon-blue) !important;
+    font-weight: 700 !important;
+    margin-bottom: 1rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: var(--font-heading) !important;
+}
+
+.upload-box p {
+    color: var(--gray-300) !important;
+    margin-bottom: 1rem !important;
+    font-size: 1.125rem !important;
+}
+
+.file-types {
+    font-size: 1rem !important;
+    color: var(--gray-500);
+    font-weight: 600;
+}
+
+#resumeInput:focus {
+    border-color: var(--neon-blue) !important;
+    box-shadow: var(--glow-blue) !important;
+    background: var(--bg-card) !important;
+}
+
+#resumeInput::placeholder {
+    color: var(--gray-600) !important;
+}
+
+.char-counter {
+    background: rgba(0, 240, 255, 0.1) !important;
+    border: 1px solid var(--neon-blue) !important;
+    color: var(--neon-blue) !important;
+    font-weight: 600 !important;
+    box-shadow: var(--glow-blue) !important;
+}
+
+/* Cyber Buttons */
+.btn-secondary {
+    background: transparent !important;
+    color: var(--neon-blue) !important;
+    border-color: var(--neon-blue) !important;
+}
+
+.btn-secondary:hover {
+    border-color: var(--neon-purple) !important;
+    color: var(--white) !important;
+    box-shadow: var(--glow-blue) !important;
+}
+
+.btn-icon {
+    background: rgba(0, 240, 255, 0.05) !important;
+    color: var(--neon-blue) !important;
+    border: 1px solid var(--neon-blue) !important;
+}
+
+.btn-icon:hover {
+    background: rgba(0, 240, 255, 0.15) !important;
+    box-shadow: var(--glow-blue) !important;
+}
+
+/* Score Display Cyber Theme */
+.score-header h2,
+.analysis-card h3,
+.insight-card h3,
+.recommendations-card h3 {
+    color: var(--neon-blue) !important;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+}
+
+.score-message,
+.subtitle {
+    color: var(--gray-300) !important;
+}
+
+.metric-label {
+    color: var(--gray-200) !important;
+}
+
+.metric-stats {
+    color: var(--gray-400) !important;
+}
+
+.metric-stats strong {
+    color: var(--neon-green) !important;
+}
+
+.progress-ring-bg {
+    stroke: var(--bg-darker) !important;
+}
+
+.score-label {
+    color: var(--gray-400) !important;
+}
+
+/* feature Sections */
+.features-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.feature-box {
+    padding: 2.5rem;
+    background: var(--bg-card);
+    border: 2px solid rgba(0, 240, 255, 0.2);
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-box::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: var(--gradient-primary);
+    border-radius: 20px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s;
+}
+
+.feature-box:hover {
+    transform: translateY(-10px);
+    border-color: var(--neon-blue);
+    box-shadow: var(--glow-blue);
+}
+
+.feature-box:hover::before {
+    opacity: 0.1;
+}
+
+.feature-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.5));
+}
+
+.feature-title {
+    font-size: 1.5rem;
+    color: var(--neon-blue);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.feature-description {
+    color: var(--gray-300);
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.feature-cta {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 8px;
+    color: var(--white);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 240, 255, 0.3);
+}
+
+.feature-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 240, 255, 0.5);
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    margin-bottom: 3rem;
+    background: var(--bg-card);
+    border-radius: 20px;
+    border: 2px solid rgba(0, 240, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    animation: pulse 4s ease-in-out infinite;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    background: var(--gradient-cyber);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 0 40px rgba(0, 240, 255, 0.5);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--gray-200);
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-badges {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-badge {
+    padding: 0.75rem 1.5rem;
+    background: rgba(0, 240, 255, 0.1);
+    border: 2px solid var(--neon-blue);
+    border-radius: 50px;
+    color: var(--neon-blue);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.875rem;
+}
+
+/* Loading Animation Enhancement */
+.loading-spinner p {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* Footer Enhancement */
+.app-footer {
+    color: var(--gray-500) !important;
+    border-top: 1px solid rgba(0, 240, 255, 0.1);
+    padding-top: 2rem !important;
+}
+
+/* Scrollbar Cyber Theme */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-darkest);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gradient-secondary);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.125rem;
+    }
+
+    .logo-text h1 {
+        font-size: 1.75rem !important;
+    }
+}
+
+/* Additional Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes highlightPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 148, 0.7);
+    }
+
+    50% {
+        box-shadow: 0 0 0 20px rgba(0, 255, 148, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 148, 0);
+    }
+}

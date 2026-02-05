@@ -1,0 +1,137 @@
+/* PDF Upload Section */
+.upload-section {
+    margin-bottom: 2rem;
+}
+
+.upload-box {
+    display: block;
+    padding: 3rem 2rem;
+    background: var(--bg-card);
+    border: 2px dashed var(--neon-blue);
+    border-radius: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-box::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: var(--gradient-primary);
+    border-radius: 16px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s;
+}
+
+.upload-box:hover {
+    border-color: var(--neon-purple);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--glow-blue);
+}
+
+.upload-box:hover::before {
+    opacity: 0.1;
+}
+
+.upload-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.upload-box h3 {
+    font-size: 1.25rem;
+    color: var(--neon-blue);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.upload-box p {
+    color: var(--gray-300);
+    margin-bottom: 0.5rem;
+}
+
+.file-types {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+}
+
+.upload-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, rgba(0, 255, 148, 0.1) 0%, rgba(0, 240, 255, 0.1) 100%);
+    border: 1px solid var(--success);
+    border-radius: 12px;
+    margin-top: 1rem;
+}
+
+.file-name {
+    color: var(--success);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.file-name::before {
+    content: '✓';
+    font-size: 1.2rem;
+}
+
+.remove-file {
+    background: transparent;
+    border: none;
+    color: var(--gray-400);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    transition: all 0.2s;
+}
+
+.remove-file:hover {
+    color: var(--error);
+    transform: scale(1.2);
+}
+
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+    gap: 1rem;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+}
+
+.divider span {
+    color: var(--gray-400);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}

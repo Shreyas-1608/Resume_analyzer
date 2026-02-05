@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ CyberResume AI | Next-Gen Intelligence</title>
+    <meta name="description"
+        content="Advanced AI-powered cyber resume analyzer with real-time keyword matching and intelligent career recommendations">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <link rel="stylesheet" href="resume-analyzer.css">
+    <link rel="stylesheet" href="cyber-theme-enhancements.css">
+    <style>
+        :root {
+            --neon-blue: #00F0FF;
+            --neon-purple: #B026FF;
+            --neon-pink: #FF00E5;
+            --neon-green: #00FF94;
+            --dark-bg: #02020a;
+            --glass-bg: rgba(10, 20, 45, 0.7);
+            --border-col: rgba(0, 240, 255, 0.2);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .cyber-grid-bg {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-col);
+            margin-bottom: 4rem;
+        }
+
+        .logo h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin: 0;
+            color: #000000;
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.9), 0 0 30px rgba(176, 38, 255, 0.6);
+            letter-spacing: 4px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .hero h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 15px;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-bottom: 6rem;
+        }
+
+        .feature-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-col);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            transition: 0.4s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .tool-toolkit {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .tool-card {
+            background: rgba(5, 5, 15, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .input-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--border-col);
+            border-radius: 30px;
+            padding: 3.5rem;
+        }
+
+        .upload-box {
+            border: 2px dashed var(--border-col);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .upload-box:hover {
+            border-color: var(--neon-blue);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .upload-status {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .remove-file {
+            background: transparent;
+            border: none;
+            color: var(--neon-pink);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .textarea-wrapper textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-col);
+            border-radius: 12px;
+            color: #fff;
+            padding: 1.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            resize: none;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #00F0FF, #0072FF);
+            color: #000;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            letter-spacing: 2px;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 2rem;
+            transition: 0.3s;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .role-card {
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-col);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .role-card.selected {
+            border-color: var(--neon-blue);
+            background: rgba(0, 240, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 2, 10, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid var(--neon-blue);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .results-section {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .score-circle {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 3rem;
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.05);
+            stroke-width: 10;
+        }
+
+        .progress-ring-fill {
+            fill: none;
+            stroke: var(--neon-blue);
+            stroke-width: 10;
+            stroke-dasharray: 690;
+            stroke-dashoffset: 690;
+            transition: stroke-dashoffset 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
+
+        .score-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .score-value {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #000000;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1rem 2rem;
+            border-radius: 20px;
+            text-shadow:
+                0 0 30px rgba(255, 255, 255, 0.9),
+                0 0 50px rgba(0, 240, 255, 0.8),
+                0 0 70px rgba(176, 38, 255, 0.6);
+            box-shadow:
+                0 0 50px rgba(0, 240, 255, 0.5),
+                inset 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <script>if (!localStorage.getItem('cyber_auth')) window.location.href = 'login.html';</script>
+
+    <div class="cyber-grid-bg"></div>
+
+    <!-- Animated Robot/Cyber Background -->
+    <canvas id="cyberAnimationCanvas"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; opacity: 0.4;"></canvas>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>CYBER<span style="color:var(--neon-purple)">RESUME</span></h1>
+            </div>
+            <div class="nav-actions">
+                <button class="btn-secondary" id="helpBtn"
+                    style="background:transparent; border:1px solid var(--border-col); color:#fff; padding:0.8rem 1.5rem; border-radius:8px; cursor:pointer; font-family:'Orbitron';">HELP_CORE</button>
+            </div>
+        </header>
+
+        <section class="hero">
+            <h2>Accessing Intelligence</h2>
+            <p style="font-size: 1.2rem; color: var(--neon-blue); letter-spacing: 2px; font-family:'Orbitron';">
+                NEURAL_NETWORK_ACTIVE // 2.0.4</p>
+        </section>
+
+        <section class="features-grid">
+            <div class="feature-box" onclick="scrollToAssessment()">
+                <span class="feature-icon">🎯</span>
+                <h3>NEURAL_ASSESSMENT</h3>
+                <p>Real-time analysis against global industry protocols.</p>
+            </div>
+            <div class="feature-box" onclick="scrollToUpload()">
+                <span class="feature-icon">📄</span>
+                <h3>DATA_INJECTION</h3>
+                <p>Inject PDF documents for immediate parsing.</p>
+            </div>
+            <div class="feature-box" onclick="openResumeTool('cognitive')">
+                <span class="feature-icon">💡</span>
+                <h3>COGNITIVE_LOGS</h3>
+                <p>Advanced AI insights and career optimization strategies.</p>
+            </div>
+        </section>
+
+        <section class="tool-toolkit">
+            <h2 style="font-family:'Orbitron'; color:var(--neon-blue); margin-bottom:3rem; letter-spacing:5px;">[
+                SYSTEM_TOOLKIT ]</h2>
+            <div class="tools-grid">
+                <div class="tool-card" style="border: 1px solid #00F0FF; box-shadow: 0 0 20px rgba(0,240,255,0.1);"
+                    onclick="openResumeTool('builder')">
+                    <span style="font-size:3rem;">📝</span>
+                    <h3 style="color:#00F0FF; font-family:'Orbitron';">BUILDER_V4</h3>
+                    <p>Neural document constructor.</p>
+                </div>
+                <div class="tool-card" style="border: 1px solid #00FF94; box-shadow: 0 0 20px rgba(0,255,148,0.1);"
+                    onclick="openResumeTool('ats')">
+                    <span style="font-size:3rem;">🎯</span>
+                    <h3 style="color:#00FF94; font-family:'Orbitron';">ATS_SCORE</h3>
+                    <p>Scanner compatibility check.</p>
+                </div>
+                <div class="tool-card" style="border: 1px solid #B026FF; box-shadow: 0 0 20px rgba(176,38,255,0.1);"
+                    onclick="openResumeTool('cover')">
+                    <span style="font-size:3rem;">✉️</span>
+                    <h3 style="color:#B026FF; font-family:'Orbitron';">CL_AI</h3>
+                    <p>Autonomous letter generation.</p>
+                </div>
+                <div class="tool-card" style="border: 1px solid #FFB800; box-shadow: 0 0 20px rgba(255,184,0,0.1);"
+                    onclick="openResumeTool('templates')">
+                    <span style="font-size:3rem;">🎨</span>
+                    <h3 style="color:#FFB800; font-family:'Orbitron';">UI_CORES</h3>
+                    <p>Visual interface layouts.</p>
+                </div>
+            </div>
+        </section>
+
+        <main id="inputSection">
+            <div class="input-section">
+                <div class="glass-card" id="assessmentSection">
+                    <h2 style="font-family:'Orbitron'; margin-bottom:2rem;">01. SELECT_ROLE</h2>
+                    <div class="role-grid">
+                        <div class="role-card" data-role="software-engineer">
+                            <span>💻</span>
+                            <h4>SWE_CORE</h4>
+                        </div>
+                        <div class="role-card" data-role="data-scientist">
+                            <span>📊</span>
+                            <h4>DATA_SCI</h4>
+                        </div>
+                        <div class="role-card" data-role="product-manager">
+                            <span>🎯</span>
+                            <h4>PROD_MGR</h4>
+                        </div>
+                        <div class="role-card" data-role="devops-engineer">
+                            <span>⚙️</span>
+                            <h4>DEVOPS</h4>
+                        </div>
+                        <div class="role-card" data-role="ui-ux-designer">
+                            <span>🎨</span>
+                            <h4>DESIGN_UI</h4>
+                        </div>
+                        <div class="role-card" data-role="cybersecurity">
+                            <span>🔐</span>
+                            <h4>CYBER_SEC</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card" id="uploadSection">
+                    <h2 style="font-family:'Orbitron'; margin-bottom:2rem;">02. DATA_STREAM</h2>
+                    <div class="upload-box" onclick="document.getElementById('pdfUpload').click()">
+                        <span style="font-size:3rem;">📁</span>
+                        <p style="font-family:'Orbitron'; margin-top:1rem;">UPLOAD_PDF_BLOB</p>
+                        <input type="file" id="pdfUpload" hidden accept=".pdf">
+                    </div>
+
+                    <div id="uploadStatus" class="upload-status hidden">
+                        <span id="fileName" style="font-family:'Rajdhani'; font-weight:bold;">file.pdf</span>
+                        <button id="removeFile" class="remove-file">✕ REMOVE</button>
+                    </div>
+
+                    <div class="textarea-wrapper">
+                        <textarea id="resumeInput" rows="12" placeholder="PASTE_TEXT_PROTOCOLS_HERE..."></textarea>
+                    </div>
+                    <button class="btn-primary" id="analyzeBtn" disabled>INITIALIZE_ANALYSIS</button>
+                    <button class="btn-secondary" id="clearBtn"
+                        style="width:100%; margin-top:1rem; background:transparent; border:1px solid var(--border-col); color:#fff; padding:1.2rem; border-radius:12px; cursor:pointer; font-family:'Orbitron';">CLEAR_BUFFER</button>
+                    <div style="margin-top:1rem; font-size:0.8rem; opacity:0.6; text-align:center;">
+                        BUFFER_SIZE: <span id="charCount">0</span> CHARS
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <section id="resultsSection" class="results-section hidden">
+            <div class="glass-card" style="text-align:center;">
+                <button id="backBtn"
+                    style="float:left; background:transparent; border:none; color:var(--neon-blue); cursor:pointer; font-family:'Orbitron';">[
+                    BACK_TO_INPUT ]</button>
+                <h2 style="font-family:'Orbitron'; margin-bottom:4rem; letter-spacing:4px;">ANALYSIS_REPORT_0xFF</h2>
+
+                <div class="score-circle">
+                    <svg class="progress-ring" width="250" height="250">
+                        <circle class="progress-ring-bg" cx="125" cy="125" r="110" />
+                        <circle class="progress-ring-fill" cx="125" cy="125" r="110" id="scoreCircle" />
+                    </svg>
+                    <div class="score-text">
+                        <span class="score-value" id="scoreValue">0</span>
+                        <span style="font-size:1rem; color:#fff5;">PERCENTILE</span>
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:2rem; margin-top:4rem;">
+                    <div class="stat-card"
+                        style="background:rgba(0,0,0,0.2); padding:2rem; border-radius:16px; border:1px solid var(--border-col);">
+                        <h5 style="color:var(--neon-blue); font-family:'Orbitron'; font-size:0.7rem;">KEYWORDS</h5>
+                        <p style="font-size:2rem; margin:0.5rem 0;"><span id="keywordPercentage">0%</span></p>
+                        <div style="font-size:0.8rem; opacity:0.6;">M: <span id="matchedCount">0</span> | MS: <span
+                                id="missingCount">0</span></div>
+                    </div>
+                    <div class="stat-card"
+                        style="background:rgba(0,0,0,0.2); padding:2rem; border-radius:16px; border:1px solid var(--border-col);">
+                        <h5 style="color:var(--neon-green); font-family:'Orbitron'; font-size:0.7rem;">SKILLS</h5>
+                        <p style="font-size:2rem; margin:0.5rem 0;"><span id="skillsPercentage">0%</span></p>
+                        <div style="font-size:0.8rem; opacity:0.6;">FOUND: <span id="skillsFound">0</span></div>
+                    </div>
+                    <div class="stat-card"
+                        style="background:rgba(0,0,0,0.2); padding:2rem; border-radius:16px; border:1px solid var(--border-col);">
+                        <h5 style="color:var(--neon-purple); font-family:'Orbitron'; font-size:0.7rem;">LEVEL</h5>
+                        <p id="experienceLevel" style="font-size:1.5rem; margin:0.5rem 0;">CHECKING</p>
+                        <div style="font-size:0.8rem; opacity:0.6;">ALIGN: <span id="experiencePercentage">0%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card"
+                        style="background:rgba(0,0,0,0.2); padding:2rem; border-radius:16px; border:1px solid var(--border-col);">
+                        <h5 style="color:var(--neon-pink); font-family:'Orbitron'; font-size:0.7rem;">QUALITY</h5>
+                        <p id="qualityLevel" style="font-size:1.5rem; margin:0.5rem 0;">SCANNING</p>
+                        <div style="font-size:0.8rem; opacity:0.6;">IDX: <span id="qualityPercentage">0%</span></div>
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:4rem; text-align:left;">
+                    <div class="glass-card" style="padding:2rem;">
+                        <h3
+                            style="color:var(--neon-green); font-family:'Orbitron'; margin-bottom:1.5rem; font-size:1rem;">
+                            [ MATCHED_PLUGINS ]</h3>
+                        <div id="matchedKeywords" style="display:flex; flex-wrap:wrap; gap:0.8rem;"></div>
+                    </div>
+                    <div class="glass-card" style="padding:2rem;">
+                        <h3
+                            style="color:var(--neon-pink); font-family:'Orbitron'; margin-bottom:1.5rem; font-size:1rem;">
+                            [ MISSING_DRIVERS ]</h3>
+                        <div id="missingKeywords" style="display:flex; flex-wrap:wrap; gap:0.8rem;"></div>
+                    </div>
+                </div>
+
+                <div style="margin-top:4rem; text-align:left;">
+                    <h3 style="font-family:'Orbitron'; margin-bottom:2rem; color:var(--neon-blue); font-size:1.2rem;">[
+                        REPAIR_PROTOCOLS ]</h3>
+                    <div id="recommendationsList"></div>
+                </div>
+
+                <button class="btn-primary" id="exportBtn"
+                    style="margin-top:4rem; max-width:400px; font-family:'Orbitron';">DOWNLOAD_METRICS_PDF</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p style="margin-top:2rem; font-family:'Orbitron'; letter-spacing:4px; color:var(--neon-blue);">
+            PIPING_DATA_THROUGH_AI...</p>
+    </div>
+
+    <script src="resume-analyzer.js"></script>
+
+    <!-- Animated Cyber Background Script -->
+    <script>
+        // ==================== ANIMATED ROBOT/CYBER BACKGROUND ====================
+        const cyberCanvas = document.getElementById('cyberAnimationCanvas');
+        if (cyberCanvas) {
+            const cyberCtx = cyberCanvas.getContext('2d');
+            let cyberW, cyberH;
+
+            const resizeCyber = () => {
+                cyberW = cyberCanvas.width = window.innerWidth;
+                cyberH = cyberCanvas.height = window.innerHeight;
+            };
+            window.addEventListener('resize', resizeCyber);
+            resizeCyber();
+
+            const robots = [];
+            for (let i = 0; i < 5; i++) {
+                robots.push({
+                    x: Math.random() * cyberW, y: Math.random() * cyberH,
+                    vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
+                    size: 30 + Math.random() * 20, rotation: 0,
+                    rotSpeed: (Math.random() - 0.5) * 0.02, pulse: Math.random() * Math.PI * 2
+                });
+            }
+
+            const dataStreams = [];
+            for (let i = 0; i < 15; i++) {
+                dataStreams.push({ x: Math.random() * cyberW, y: -50, speed: 2 + Math.random() * 3 });
+            }
+
+            const circuitNodes = [];
+            for (let i = 0; i < 30; i++) {
+                circuitNodes.push({
+                    x: Math.random() * cyberW, y: Math.random() * cyberH,
+                    vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3
+                });
+            }
+
+            function drawRobot(robot) {
+                cyberCtx.save();
+                cyberCtx.translate(robot.x, robot.y);
+                cyberCtx.rotate(robot.rotation);
+
+                const s = robot.size;
+                const pulse = Math.sin(robot.pulse) * 0.2 + 1;
+
+                cyberCtx.strokeStyle = `rgba(0, 240, 255, ${0.3 * pulse})`;
+                cyberCtx.lineWidth = 2;
+                cyberCtx.strokeRect(-s / 2, -s / 2, s, s);
+                cyberCtx.strokeRect(-s / 3, -s / 1.5, s / 1.5, s / 3);
+
+                cyberCtx.fillStyle = `rgba(0, 240, 255, ${0.8 * pulse})`;
+                cyberCtx.beginPath();
+                cyberCtx.arc(-s / 6, -s / 1.3, 3, 0, Math.PI * 2);
+                cyberCtx.fill();
+                cyberCtx.beginPath();
+                cyberCtx.arc(s / 6, -s / 1.3, 3, 0, Math.PI * 2);
+                cyberCtx.fill();
+
+                cyberCtx.beginPath();
+                cyberCtx.moveTo(-s / 2, 0); cyberCtx.lineTo(-s / 1.3, s / 4);
+                cyberCtx.moveTo(s / 2, 0); cyberCtx.lineTo(s / 1.3, s / 4);
+                cyberCtx.stroke();
+
+                cyberCtx.beginPath();
+                cyberCtx.moveTo(0, -s / 1.5); cyberCtx.lineTo(0, -s / 1.2);
+                cyberCtx.stroke();
+
+                cyberCtx.restore();
+            }
+
+            function animateCyber() {
+                cyberCtx.fillStyle = 'rgba(2, 2, 10, 0.1)';
+                cyberCtx.fillRect(0, 0, cyberW, cyberH);
+
+                robots.forEach(robot => {
+                    robot.x += robot.vx; robot.y += robot.vy;
+                    robot.rotation += robot.rotSpeed; robot.pulse += 0.05;
+
+                    if (robot.x < -50) robot.x = cyberW + 50;
+                    if (robot.x > cyberW + 50) robot.x = -50;
+                    if (robot.y < -50) robot.y = cyberH + 50;
+                    if (robot.y > cyberH + 50) robot.y = -50;
+
+                    drawRobot(robot);
+                });
+
+                cyberCtx.font = '12px monospace';
+                dataStreams.forEach(stream => {
+                    stream.y += stream.speed;
+                    if (stream.y > cyberH + 100) { stream.y = -100; stream.x = Math.random() * cyberW; }
+
+                    for (let i = 0; i < 10; i++) {
+                        const char = Math.random() > 0.5 ? '1' : '0';
+                        cyberCtx.fillStyle = `rgba(0, 255, 148, ${(10 - i) / 20})`;
+                        cyberCtx.fillText(char, stream.x, stream.y - i * 15);
+                    }
+                });
+
+                cyberCtx.strokeStyle = 'rgba(176, 38, 255, 0.2)';
+                cyberCtx.lineWidth = 1;
+                circuitNodes.forEach((node, i) => {
+                    node.x += node.vx; node.y += node.vy;
+                    if (node.x < 0 || node.x > cyberW) node.vx *= -1;
+                    if (node.y < 0 || node.y > cyberH) node.vy *= -1;
+
+                    cyberCtx.fillStyle = 'rgba(176, 38, 255, 0.6)';
+                    cyberCtx.beginPath();
+                    cyberCtx.arc(node.x, node.y, 3, 0, Math.PI * 2);
+                    cyberCtx.fill();
+
+                    for (let j = i + 1; j < circuitNodes.length; j++) {
+                        const other = circuitNodes[j];
+                        const dist = Math.hypot(node.x - other.x, node.y - other.y);
+                        if (dist < 150) {
+                            cyberCtx.globalAlpha = 1 - dist / 150;
+                            cyberCtx.beginPath();
+                            cyberCtx.moveTo(node.x, node.y);
+                            cyberCtx.lineTo(other.x, other.y);
+                            cyberCtx.stroke();
+                            cyberCtx.globalAlpha = 1;
+                        }
+                    }
+                });
+
+                requestAnimationFrame(animateCyber);
+            }
+            animateCyber();
+        }
+    </script>
+</body>
+
+</html>
